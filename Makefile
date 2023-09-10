@@ -3,19 +3,19 @@ NAME = Inception
 all : $(NAME)
 
 $(NAME) :
-	sudo mkdir -p "/Users/najlio/data/mariadb"
-	sudo mkdir -p "/Users/najlio/data/wordpress"
-	sudo docker compose -f ./srcs/docker-compose.yaml up --build -d
+	sudo mkdir -p "/Users/najlio/data/mariadb_data"
+	sudo mkdir -p "/Users/najlio/data/wordpress_data"
+	sudo docker compose -f ./srcs/docker-compose.yaml up
 
 down :
-	sudo docker compose -f ./srcs/docker-compose.yaml down
+	docker compose -f ./srcs/docker-compose.yaml down
 	
 restart :
-	sudo docker compose -f ./srcs/docker-compose.yaml restart
+	docker compose -f ./srcs/docker-compose.yaml restart
 
 
 prune :
-	sudo docker compose -f ./srcs/docker-compose.yaml down --rmi all --volumes
+	docker compose -f ./srcs/docker-compose.yaml down --rmi all --volumes
 
 re : fclean all
 	
