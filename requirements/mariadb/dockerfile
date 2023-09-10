@@ -1,0 +1,11 @@
+FROM debian:bullseye
+
+RUN apt update && apt upgrade && apt install -y mariadb-server
+
+COPY conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+COPY tools/init.sh /tmp/init.sh
+RUN chmod +x /tmp/init.sh
+
+CMD ["/tmp/init.sh"]
+

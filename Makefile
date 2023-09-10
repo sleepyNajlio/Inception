@@ -1,15 +1,28 @@
-up:
-	@docker compose -f ./scrs/docker-compose.yaml up -d --build
+NAME = Inception
 
-down:
-	@docker compose -f ./scrs/docker-compose.yaml down
+all : $(NAME)
 
-re:
-	@docker compose -f scrs/docker-compose.yaml up -d --build
+$(NAME) :
+	sudo mkdir -p "/Users/najlio/data/mariadb"
+	sudo mkdir -p "/Users/najlio/data/wordpress"
+	sudo docker compose -f ./srcs/docker-compose.yaml up --build -d
 
-clean:
-	@docker stop $(docker ps -qa);\
-	docker rm $(docker ps -qa);\
-	docker rmi -f $(docker images -qa);\
-	docker volume rm $(docker volume ls -q);\
-	docker network rm $(docker network ls -q);\
+down :
+	sudo docker compose -f ./srcs/docker-compose.yaml down
+	
+restart :
+	sudo docker compose -f ./srcs/docker-compose.yaml restart
+
+
+prune :
+	sudo docker compose -f ./srcs/docker-compose.yaml down --rmi all --volumes
+
+re : fclean all
+	
+
+clean : down prune
+
+
+fclean : clean
+	sudo rm -rf /Users/najlio/data/mariadb
+	sudo rm -rf /Users/najlio/data/wordpress
