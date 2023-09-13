@@ -1,3 +1,5 @@
+all: up
+
 build:
 	mkdir -p /home/$(USER)/data/wordpress
 	mkdir -p /home/$(USER)/data/mariadb
@@ -20,6 +22,4 @@ fclean: clean
 	rm -rf /home/$(USER)/data/mariadb
 
 re: fclean up
-
-
 

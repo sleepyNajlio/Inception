@@ -13,6 +13,7 @@ services:
       - wordpress_data:/var/www/html
     depends_on:
       - wordpress
+    restart: on-failure
   mariadb:
     build: ./requirements/mariadb/
     image: mariadb:inception
@@ -25,6 +26,7 @@ services:
       - my_network
     volumes:
       - mariadb_data:/var/lib/mysql
+    restart: on-failure
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress:inception
@@ -39,6 +41,7 @@ services:
       - wordpress_data:/var/www/html
     depends_on:
       - mariadb
+    restart: on-failure
 
 volumes:
   wordpress_data:
