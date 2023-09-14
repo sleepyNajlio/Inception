@@ -3,7 +3,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     cd /var/www/html
 
     wp core download --allow-root;
-    cp /tmp/wp-config.php /var/www/html/
+    cp /var/www/wp-config.php /var/www/html/
 
     # sleep 10
     # wp config create  --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_USER_PASSWORD --dbhost=$DB_HOST --allow-root
