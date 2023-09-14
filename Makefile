@@ -18,8 +18,8 @@ clean: down
 	docker system prune -af
 
 fclean: clean
-	rm -rf /home/nloutfi/data/wp_data
-	rm -rf /home/nloutfi/data/db_data
+	sudo rm -rf /home/nloutfi/data/wp_data
+	sudo rm -rf /home/nloutfi/data/db_data
 
 re: fclean up
 
