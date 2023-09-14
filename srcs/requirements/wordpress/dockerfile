@@ -16,13 +16,12 @@ RUN mkdir -p /var/www/html
 RUN mkdir -p /run/php
 
 # Download and extract WordPress
-RUN wget -q -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
-    tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 && \
-    rm /tmp/wordpress.tar.gz
+# RUN wget -q -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
+#     tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 && \
+#     rm /tmp/wordpress.tar.gz
 
 # Set ownership and permissions
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/*
 
 # Configure php-fpm
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf

@@ -50,14 +50,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/nloutfi/data/wp_data
+      device: /home/nloutfi/data/wordpress_data
   mariadb_data:
     name: mariadb_data
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/nloutfi/data/db_data
+      device: /home/nloutfi/data/mariadb_data
 
 networks:
   my_network:
