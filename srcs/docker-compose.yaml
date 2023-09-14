@@ -45,17 +45,19 @@ services:
 
 volumes:
   wordpress_data:
+    name: wordpress_data
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /Users/najlio/data/wordpress_data
+      device: /home/nloutfi/data/wp_data
   mariadb_data:
+    name: mariadb_data
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /Users/najlio/data/mariadb_data
+      device: /home/nloutfi/data/db_data
 
 networks:
   my_network:

@@ -1,8 +1,8 @@
 all: up
 
 build:
-	mkdir -p /home/$(USER)/data/wordpress
-	mkdir -p /home/$(USER)/data/mariadb
+	mkdir -p /home/nloutfi/data/wp_data
+	mkdir -p /home/nloutfi/data/db_data
 	docker compose -f srcs/docker-compose.yaml build
 
 up: build
@@ -18,8 +18,8 @@ clean: down
 	docker system prune -af
 
 fclean: clean
-	rm -rf /home/$(USER)/data/wordpress
-	rm -rf /home/$(USER)/data/mariadb
+	rm -rf /home/nloutfi/data/wp_data
+	rm -rf /home/nloutfi/data/db_data
 
 re: fclean up
 
