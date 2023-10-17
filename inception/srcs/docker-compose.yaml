@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./requirements/nginx/
+    image: nginx:inception
+    container_name: nginx
+    ports:
+      - "443:443"
+    networks:
+      - my_network
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - wordpress
+    restart: on-failure
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb:inception
+    container_name: mariadb
+    env_file:
+      - .env
+    ports:
+      - "3306"
+    networks:
+      - my_network
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: on-failure
+  wordpress:
+    build: ./requirements/wordpress/
+    image: wordpress:inception
+    container_name: wordpress
+    env_file:
+      - .env
+    ports:
+      - "9000"
+    networks:
+      - my_network
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - mariadb
+    restart: on-failure
+
+volumes:
+  wordpress_data:
+    name: wordpress_data
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nloutfi/data/wp_data
+  mariadb_data:
+    name: mariadb_data
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nloutfi/data/db_data
+
+networks:
+  my_network:
+    name: my_network
+    driver: bridge

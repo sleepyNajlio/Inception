@@ -1,0 +1,32 @@
+FROM debian:bullseye
+
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y \
+        php7.4 \
+        php-fpm \
+        php-mysql \
+        curl \
+        wget \
+        unzip \
+        mariadb-client
+
+
+RUN mkdir -p /var/www/html
+RUN mkdir -p /run/php
+
+# Set ownership and permissions
+RUN chown -R www-data:www-data /var/www/ 
+
+# Configure php-fpm
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+# Install wp-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+
+COPY ./tools/ var/www/
+RUN chmod +x var/www/init_wordpress.sh
+
+# Start php-fpm
+CMD ["/var/www/init_wordpress.sh"]
